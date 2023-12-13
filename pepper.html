@@ -14,14 +14,30 @@
         // createElement("[생성하고자 하는 HTML 태그]", [propoerties], [content])
         const span = React.createElement(
             "span", 
-            {id: "1st-span", style: {color: "red"} }, 
+            {
+                // eventlistener: on~
+                onMouseEnter: () => console.log('mouse enter'),
+            }, // ={id: "1st-span", style: {color: "red"} },= 
             "Hello, i am the 1st-span"
             ); 
 
         // How we can put React element(span) inside about <body>
         // Use react-dom
-        ReactDOM.render(span, root);
+        // =ReactDOM.render(span, root);=
         // render: React element를 가지고 HTML로 만들어 배치한다.
         // "show it to the user"
+
+        const btn = React.createElement("button", {
+            // property에 eventlistener를 등록할 수 있다.
+            onClick: () => console.log("im clicked"),
+        }, "Click me");
+
+        // 2개의 component를 가지는 component 생성
+        const container = React.createElement("div", null, [span, btn]);
+        
+        ReactDOM.render(container, root);
+
     </script>
 </html>
+
+<!-- interactive한 어플리케이션에서 하는 작업들 모두가 event들을 감지하는 일이다 -->
