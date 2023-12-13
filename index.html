@@ -3,25 +3,56 @@
     <body>
         <div id:"root"></div>
     </body>
-    <!-- ReactJS install -->
-    <!-- ReactJS: 어플리케이션이 interactive하도록 마들어주는 library -->
     <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
-    <!-- React-dom: 모든 React element들을 HTML body에 둘 수 있도록 해주는 library -->
     <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
-    <script>
+    <!-- JSX 코드를 ReactJS 코드로 변환시켜주는 library -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
         const root = document.getElementById("root");
 
-        // createElement("[생성하고자 하는 HTML 태그]", [propoerties], [content])
+        // how to replace 'createElement'
+        // JSX: javascript를 확장한 문법, HTML에서 사용한 문법과 흡사한 문법으로 React 코드를 작성할 수 있다.
+
+        /* Old way
         const span = React.createElement(
             "span", 
-            {id: "1st-span", style: {color: "red"} }, 
+            {
+                // eventlistener: on~
+                onMouseEnter: () => console.log('mouse enter'),
+            }, // ={id: "1st-span", style: {color: "red"} },= 
             "Hello, i am the 1st-span"
-            ); 
+        ); 
+        */
 
-        // How we can put React element(span) inside about <body>
-        // Use react-dom
-        ReactDOM.render(span, root);
-        // render: React element를 가지고 HTML로 만들어 배치한다.
-        // "show it to the user"
+        /* const Title = (
+            <h3 id="title" onMouseEnter={() => console.log("mouse enter")}>
+            Hello i'm a title
+            </h3>
+        ); make this function */
+        const Title = () => (
+            <h3 id="title" onMouseEnter={() => console.log("mouse enter")}>
+            Hello i'm a title
+            </h3>
+        );
+
+        const Button = () => (
+            <button onClick={() => console.log("Clicked")}>
+                Click me
+            </button>
+        );
+
+        // const container = React.createElement( "div", null, [Title, Button]);
+        const Container = () => (
+            <div>
+                <Title /> 
+                <Button />
+                <button>Hello</button>
+            </div>
+        );
+        // component의 첫글자는 항상 대문자여야만 한다.(Title, Button...)
+        // 소문자 이면 JSX는 함수가 아니라 html 태그로 인식한다.
+
+        ReactDOM.render(<Container />, root);
+        // How we can use component inside another component!!!
     </script>
 </html>
