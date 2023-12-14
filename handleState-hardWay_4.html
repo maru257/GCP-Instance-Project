@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <div id:"root"></div>
+    </body>
+    <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <!-- 어떻게 하면 React.js 어플에 값이 바뀔 데이터를 담아줄 수 있을까 -->
+    <script type="text/babel">
+        const root = document.getElementById("root");
+        let counter = 0;
+        function countUp() {
+            counter = counter +1;
+            render();
+            // 값을 바꿀때마다, 다시 렌더링하는걸 잊어서는 안된다.
+        }
+        function render() {
+            ReactDOM.render(<Container />, root);
+        }
+        function Container() {
+            return (
+                <div>
+                    <h3>Total clicks: {counter}</h3>
+                    <button onClick={countUp}>Click me</button>
+                </div>
+            );
+        }
+        // 렌더를 할때마다 새로운 Container를 생성하지 않는다.
+        // 바뀐 부분만 새로 생성된다.
+        render();
+    </script>
+</html>
+<!-- Reactjs는 UI에서 바뀐부분만 업데이트 해준다.({counter}) -->
+<!-- vanila.html에서 했던 방식은 <span>, <div>, UI를 모두 업데이트 하는 과정을 거친다. -->
